@@ -1,0 +1,28 @@
+var Twitter = require('twitter');
+
+
+
+var twitter = new Twitter({
+  consumer_key: 'wwwwwwwwwwwwwwwwwwwwww',
+  consumer_secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxx',
+  access_token_key: 'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',
+  access_token_secret: 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'
+});
+
+
+
+
+twitter.stream('statuses/filter', { track: '#Paris' },
+    function(stream) {
+
+        stream.on('data', function( tweet ) {
+            var tweet_id = tweet.id_str;
+            var tweet_text = tweet.text;
+            console.log(tweet_text);
+        });
+
+        stream.on('error', function ( error ) {
+            console.error(error);
+        });
+
+    });
